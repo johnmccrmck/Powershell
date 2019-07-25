@@ -24,7 +24,7 @@ function Get-RandomPassword {
 $outCSV = @()
 
 Import-Module ActiveDirectory
-$users = Get-ADUser -Filter '(ProxyAddresses -like "*SMTP*") -and (Enabled -eq $True) -and (UserPrincipalName -notlike "*@picerne.local")'
+$users = Get-ADUser -Filter '(ProxyAddresses -like "*SMTP*") -and (Enabled -eq $True) -and (UserPrincipalName -notlike "*@contoso.local")'
 
 foreach($user in $users) {
     $newPassword = Get-RandomPassword
