@@ -4,7 +4,9 @@
     This script adding L2TP over IPsec VPN. 
     Version: 1.0.3   
   .DESCRIPTION 
-    With this Powershell Script the addition of an L2TP over IPsec VPN can be automated 
+    With this Powershell Script the addition of an L2TP over IPsec VPN can be automated
+  .WHAT THIS SCRIPT DOES
+    This script will add the L2TP VPN as well as add the REG-Key Necessary 
   #> 
   
 #checks if powershell is in Administrator mode, if not powershell will fix it   
@@ -45,4 +47,4 @@ else {
     else {  
         ncpa.cpl  
     }  
-} 
+}  
