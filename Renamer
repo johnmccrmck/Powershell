@@ -1,0 +1,5 @@
+#This script was made at a request of a user to replace all files within 2-4 subfolders deep.
+#The request was for each filename that starts with X replace with Y
+
+get-childitem -Path C:\Temp\*\Folder * -Recurse -Include STARTING* | Rename-Item -NewName {$_.name -replace 'STARTING','ENDING'}
+
