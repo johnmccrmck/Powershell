@@ -1,0 +1,3 @@
+#used to delete a set of files with certain naming characteristics
+
+Remove-Item -Path "D:\FILE\PATH\Folder" -Recurse -Include *"("* -Exclude *"Edited"*
