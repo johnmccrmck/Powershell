@@ -1,0 +1,40 @@
+$olddomain = "@"
+$newdomain = "@"
+$makealias = $true
+$users = Get-ADUser -Identity powershelltest -Properties mail,department,ProxyAddresses
+
+Foreach ($user in $users) {
+    $oldemail = "$($user.samaccountname)$($olddomain)"
+    $newemail = "$($user.samaccountname)$($newdomain)"
+    Write-Host "User: $($user.samaccountname)`n------------------------"
+
+
+#Update Mail Attribute    
+    If ($user.mail -ieq $oldemail) {
+        Write-Host "Mail Attribute: Old Value Detected Updating..."
+        Write-Host "Old Value: $($user.mail)"
+        Set-ADUser $user -EmailAddress $newemail
+        Write-Host "New Value: $($newemail)"
+    }
+    Elseif ($user.mail -ieq "$newemail") {
+        Write-Host "Mail Attribute: New Value Detected Skipping..."
+        Write-Host "Value: $($user.mail)"
+    }
+    Else {
+        Write-Host "Mail Attribute: Unknown Value Detected NOT Updating..."
+        Write-Host "Value: $($user.mail)"
+    }
+
+Set-ADUser $user -remove @{
+        'proxyAddresses'="SMTP:$oldemail"
+    }
+
+Set-ADUser $user -Add @{
+        'proxyAddresses'="smtp:$oldemail"
+    }
+
+Set-ADUser $user -Add @{
+        'proxyAddresses'="SMTP:$newemail"
+    }
+            
+}
